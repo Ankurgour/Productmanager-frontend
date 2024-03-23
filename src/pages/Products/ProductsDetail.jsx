@@ -69,11 +69,11 @@ function ProductDetail() {
         try {
             let endpoint;
             if (userRole === 'admin') {
-                endpoint = 'http://localhost:5000/api/change';
+                endpoint = 'https://productmanager-backend.onrender.com/api/change';
             } else if (userRole === 'team member') {
                 console.log('reached endpoint')
                 console.log(product_id);
-                endpoint = `http://localhost:5000/api/review/submitRequest/${product_id}`;
+                endpoint = `https://productmanager-backend.onrender.com/api/review/submitRequest/${product_id}`;
             }
 
             const res = await fetch(croppedImageUrl);
@@ -87,7 +87,7 @@ function ProductDetail() {
             formData.append("description", product.description);
             formData.append("department", product.department);
     
-            const response = await fetch(`http://localhost:5000/api/review/submitRequest/${product_id}`, {
+            const response = await fetch(`https://productmanager-backend.onrender.com/api/review/submitRequest/${product_id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({userId:JSON.parse(localStorage.getItem('user'))._id,changes:product}),

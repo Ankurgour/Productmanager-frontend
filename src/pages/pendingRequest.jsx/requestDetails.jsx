@@ -12,7 +12,7 @@ function RequestDetailsPage() {
 
   const handleApprove = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/review/approveRequest/${requestId}`, {
+      const res = await fetch(`https://productmanager-backend.onrender.com/api/review/approveRequest/${requestId}`, {
         method: 'PATCH',
       });
       const data = await res.json();
@@ -25,7 +25,7 @@ function RequestDetailsPage() {
 
   const handleReject = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/review/rejectRequest/${requestId}`, {
+      const res = await fetch(`https://productmanager-backend.onrender.com/api/review/rejectRequest/${requestId}`, {
         method: 'PATCH',
       });
       const data = await res.json();
@@ -39,7 +39,7 @@ function RequestDetailsPage() {
   useEffect(() => {
     const fetchRequestDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/review/request/${requestId}`);
+        const response = await fetch(`https://productmanager-backend.onrender.com/api/review/request/${requestId}`);
         if (!response.ok) throw new Error('Failed to fetch request details');
         const data = await response.json();
         setRequestDetails(data);

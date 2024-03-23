@@ -10,7 +10,7 @@ function MySubmissions() {
     useEffect(() => {
         const fetchSubmissions = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/review/mySubmissions/${userId}`)
+                const response = await fetch(`https://productmanager-backend.onrender.com/api/review/mySubmissions/${userId}`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch submissions');
                 }

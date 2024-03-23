@@ -17,7 +17,7 @@ function PendingRequestsPage() {
             return;
         }
 
-        fetch('http://localhost:5000/api/review/allRequests')
+        fetch('https://productmanager-backend.onrender.com/api/review/allRequests')
             .then(res => res.json())
             .then(data => setRequests(data.data))
             .catch(error => console.error('Error fetching data:', error));
