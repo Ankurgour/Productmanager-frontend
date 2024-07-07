@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-const isAuthenticated = () => {
+export const isAuthenticated = () => {
   const token = localStorage.getItem('token');
   return token !== null;
 };
@@ -11,7 +11,7 @@ const getUserRole = () => {
 
 const AuthenticatedElement = ({ children }) => {
   const authenticated = isAuthenticated();
-  console.log(getUserRole());
+  // console.log(getUserRole());
   return authenticated ? children: <Navigate to="/login" />;
 };
 

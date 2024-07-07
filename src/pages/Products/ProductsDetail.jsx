@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ReactCrop from 'react-image-crop';
-import './productDetails.css';
 import 'react-image-crop/dist/ReactCrop.css';
+// import { label } from '../../components/ui/label';
+import Header from '../../components/shared/Header'
 
 function ProductDetail() {
     const { id } = useParams();
@@ -20,7 +21,6 @@ function ProductDetail() {
         department:'',
     });
 
-    console.log(changes)
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
@@ -110,28 +110,167 @@ function ProductDetail() {
     };
 
     return (
-        <div className="form-container">
-            <form onSubmit={handleSubmit}>
-                <label>Name:
-                    <input type="text" name="name" value={product.name} onChange={handleChange} />
-                </label>
-                <label>Price:
-                    <input type="number" name="price" value={product.price} onChange={handleChange} />
-                </label>
-                <label>Description:
-                    <textarea name="description" value={product.description} onChange={handleChange} />
-                </label>
-                <label>Department:
-                    <input type="text" name='department' value={product.department} onChange={handleChange} />
-                </label>
-                <input type="file" accept="image/*" onChange={handleImageUpload} />
-                {product.images.map((image, index) => (
-                    <img key={index} src={image} alt={`product-${index}`} style={{ maxWidth: '150px' }} />
-                ))}
-                <button type="submit">{userRole === 'admin' ? 'Change' : 'Submit for Approval'}</button>
-            </form>
-        </div>
-    );
+        <>
+        <Header/>
+        <div className="flex justify-center items-center p-6 bg-gray-100">
+        <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
+            <label className="block mb-4">
+                <span className="text-gray-700">Name:</span>
+                <input
+                    type="text"
+                    name="name"
+                    value={product.name}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
+                />
+            </label>
+            <label className="block mb-4">
+                <span className="text-gray-700">Price:</span>
+                <input
+                    type="number"
+                    name="price"
+                    value={product.price}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
+                />
+            </label>
+            <label className="block mb-4">
+                <span className="text-gray-700">Description:</span>
+                <textarea
+                    name="description"
+                    value={product.description}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
+                />
+            </label>
+            <label className="block mb-4">
+                <span className="text-gray-700">Department:</span>
+                <input
+                    type="text"
+                    name="department"
+                    value={product.department}
+                    onChange={handleChange}
+                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
+                />
+            </label>
+            <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-red-500 hover:file:bg-blue-100"
+            />
+            {product.images.map((image, index) => (
+                <img
+                    key={index}
+                    src={image}
+                    alt={`product-${index}`}
+                    className="mt-4 max-w-xs rounded-md shadow-md"
+                />
+            ))}
+            <button
+                type="submit"
+                className="mt-6 w-full py-2 px-4  text-red-500 rounded-md shadow-sm hover:bg-red-500 hover:text-white focus:outline-none focus:ring focus:ring-blue-300"
+            >
+                {userRole === 'admin' ? 'Change' : 'Submit for Approval'}
+            </button>
+        </form>
+    </div>
+    </>
+);
 }
 
 export default ProductDetail;
+
+
+// "use client";
+
+// import { useState } from "react";
+// import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "../../components/shared/productDetails";
+// import { Input } from "../../components/ui/Input";
+// import { Textarea } from "../../components/ui/Textarea";
+// import { Button } from "../../components/ui/Button";
+
+// export default function Component() {
+//   const [image, setImage] = useState(null);
+
+//   const handleImageChange = (e) => {
+//     const file = e.target.files[0];
+//     console.log(file);
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onloadend = () => {
+//         setImage(reader.result);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   return (
+//     <Card className="w-full max-w-lg mx-auto p-4">
+//       <CardHeader>
+//         <CardTitle>New Product</CardTitle>
+//       </CardHeader>
+//       <CardContent>
+//         <div className="space-y-4">
+//           <div className="space-y-2">
+//             <label htmlFor="name" className="block text-sm font-medium">
+//               Name:
+//             </label>
+//             <Input id="name" placeholder="New Product" defaultValue="New Product" />
+//           </div>
+//           <div className="space-y-2">
+//             <label htmlFor="price" className="block text-sm font-medium">
+//               Price:
+//             </label>
+//             <Input id="price" placeholder="800" defaultValue="800" />
+//           </div>
+//           <div className="space-y-2">
+//             <label htmlFor="description" className="block text-sm font-medium">
+//               Description:
+//             </label>
+//             <Textarea
+//               id="description"
+//               placeholder="Description"
+//               defaultValue="The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the goodness of 100% Natural..."
+//             />
+//           </div>
+//           <div className="space-y-2">
+//             <label htmlFor="department" className="block text-sm font-medium">
+//               Department:
+//             </label>
+//             <Input id="department" placeholder="Music" defaultValue="Music" />
+//           </div>
+//           <div className="space-y-2">
+//             <label htmlFor="image" className="block text-sm font-medium">
+//               Upload Image:
+//             </label>
+//             <input type="file" id="image" onChange={handleImageChange} className="form-input w-full p-2 border border-gray-300 rounded" />
+//             {image && (
+//               <div className="relative mt-2">
+//                 <img
+//                   className="w-full h-auto max-h-64 object-contain cursor-move resize"
+//                   onDragOver={(e) => e.preventDefault()}
+//                   onDrop={(e) => {
+//                     e.preventDefault();
+//                     const file = e.dataTransfer.files[0];
+//                     const reader = new FileReader();
+//                     reader.onloadend = () => {
+//                       setImage(reader.result);
+//                     };
+//                     reader.readAsDataURL(file);
+//                   }}
+//                   src={image}
+//                   alt="Product"
+//                 />
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </CardContent>
+//       <CardFooter>
+//         <Button className="w-full bg-blue-600 text-white">Submit for Approval</Button>
+//       </CardFooter>
+//     </Card>
+//   );
+// }
+
