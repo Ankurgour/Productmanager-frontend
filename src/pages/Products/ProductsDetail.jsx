@@ -11,7 +11,8 @@ function ProductDetail() {
     const [product, setProduct] = useState({ name: '', price: '', images: [], description: '', department: '' });
     const [crop, setCrop] = useState({ aspect: 16 / 9 });
     const [croppedImageUrl, setCroppedImageUrl] = useState(null);
-    const userRole = JSON.parse(localStorage.getItem('user')).role;
+    const userRole = localStorage.getItem('role');
+    console.log("asdf",userRole);
     const [product_id,setProduct_id]  = useState('');
     const [changes, setChanges] = useState({
         image:'',
@@ -90,7 +91,7 @@ function ProductDetail() {
             const response = await fetch(`https://productmanager-backend.onrender.com/api/review/submitRequest/${product_id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify({userId:JSON.parse(localStorage.getItem('user'))._id,changes:product}),
+                body: JSON.stringify({userId:localStorage.getItem('user'),changes:product}),
                 
             });
     
@@ -112,8 +113,8 @@ function ProductDetail() {
     return (
         <>
         <Header/>
-        <div className="flex justify-center items-center p-6 bg-gray-100">
-        <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
+        <div className="flex items-center justify-center p-6 bg-gray-100">
+        <form onSubmit={handleSubmit} className="w-full max-w-lg p-6 bg-white rounded-lg shadow-md">
             <label className="block mb-4">
                 <span className="text-gray-700">Name:</span>
                 <input
@@ -121,7 +122,7 @@ function ProductDetail() {
                     name="name"
                     value={product.name}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
+                    className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
                 />
             </label>
             <label className="block mb-4">
@@ -131,7 +132,7 @@ function ProductDetail() {
                     name="price"
                     value={product.price}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
+                    className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
                 />
             </label>
             <label className="block mb-4">
@@ -140,7 +141,7 @@ function ProductDetail() {
                     name="description"
                     value={product.description}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
+                    className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
                 />
             </label>
             <label className="block mb-4">
@@ -150,7 +151,7 @@ function ProductDetail() {
                     name="department"
                     value={product.department}
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
+                    className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
                 />
             </label>
             <input
@@ -164,12 +165,12 @@ function ProductDetail() {
                     key={index}
                     src={image}
                     alt={`product-${index}`}
-                    className="mt-4 max-w-xs rounded-md shadow-md"
+                    className="max-w-xs mt-4 rounded-md shadow-md"
                 />
             ))}
             <button
                 type="submit"
-                className="mt-6 w-full py-2 px-4  text-red-500 rounded-md shadow-sm hover:bg-red-500 hover:text-white focus:outline-none focus:ring focus:ring-blue-300"
+                className="w-full px-4 py-2 mt-6 text-red-500 rounded-md shadow-sm hover:bg-red-500 hover:text-white focus:outline-none focus:ring focus:ring-blue-300"
             >
                 {userRole === 'admin' ? 'Change' : 'Submit for Approval'}
             </button>
@@ -206,7 +207,7 @@ export default ProductDetail;
 //   };
 
 //   return (
-//     <Card className="w-full max-w-lg mx-auto p-4">
+//     <Card className="w-full max-w-lg p-4 mx-auto">
 //       <CardHeader>
 //         <CardTitle>New Product</CardTitle>
 //       </CardHeader>
@@ -244,11 +245,11 @@ export default ProductDetail;
 //             <label htmlFor="image" className="block text-sm font-medium">
 //               Upload Image:
 //             </label>
-//             <input type="file" id="image" onChange={handleImageChange} className="form-input w-full p-2 border border-gray-300 rounded" />
+//             <input type="file" id="image" onChange={handleImageChange} className="w-full p-2 border border-gray-300 rounded form-input" />
 //             {image && (
 //               <div className="relative mt-2">
 //                 <img
-//                   className="w-full h-auto max-h-64 object-contain cursor-move resize"
+//                   className="object-contain w-full h-auto cursor-move resize max-h-64"
 //                   onDragOver={(e) => e.preventDefault()}
 //                   onDrop={(e) => {
 //                     e.preventDefault();
@@ -268,7 +269,7 @@ export default ProductDetail;
 //         </div>
 //       </CardContent>
 //       <CardFooter>
-//         <Button className="w-full bg-blue-600 text-white">Submit for Approval</Button>
+//         <Button className="w-full text-white bg-blue-600">Submit for Approval</Button>
 //       </CardFooter>
 //     </Card>
 //   );

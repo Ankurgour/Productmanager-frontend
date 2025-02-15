@@ -16,6 +16,11 @@ function LoginForm() {
         event.preventDefault();
         setLoading(true); 
         try {
+            // const response = await fetch('https://productmanager-backend.onrender.com/api/login', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ email, password }),
+            // });
             const response = await fetch('https://productmanager-backend.onrender.com/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -23,9 +28,11 @@ function LoginForm() {
             });
             if (!response.ok) throw new Error('Login failed');
             const res = await response.json();
+            console.log(res);
 
-            localStorage.setItem('user', JSON.stringify(res.user));
+            localStorage.setItem('role', res.role);
             localStorage.setItem('token', res.token);
+            localStorage.setItem('user', res.id);
             navigate('/');
         } catch (error) {
             console.error('Login Error:', error);
@@ -39,10 +46,10 @@ function LoginForm() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-muted">
-            <div className="mx-auto w-full max-w-md space-y-8 rounded-lg bg-background p-8 shadow-xl">
+        <div className="flex items-center justify-center min-h-screen bg-muted">
+            <div className="w-full max-w-md p-8 mx-auto space-y-8 rounded-lg shadow-xl bg-background">
                 <div className="flex flex-col items-center space-y-2 text-red-600">
-                    <PackageIcon className="h-12 w-12 text-primary" />
+                    <PackageIcon className="w-12 h-12 text-primary" />
                     <h2 className="text-2xl font-bold">Product Manager</h2>
                 </div>
                 {loading ? (
@@ -73,12 +80,12 @@ function LoginForm() {
                                 required
                             />
                         </div>
-                        <Button type="submit" className="w-full hover:bg-red-500 border-black border">
+                        <Button type="submit" className="w-full border border-black hover:bg-red-500">
                             Sign In
                         </Button>
                     </form>
                 )}
-                <div className="text-center text-sm text-muted-foreground">
+                <div className="text-sm text-center text-muted-foreground">
                     Don't have an account?{' '}
                     <Link to="/register" className="font-medium underline underline-offset-4">
                         Sign up

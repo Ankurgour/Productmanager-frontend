@@ -8,13 +8,17 @@ function PendingRequestsPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userRole = JSON.parse(localStorage.getItem('user')).role;
+        const userRole = localStorage.getItem('role');
 
         if (userRole !== 'admin') {
             navigate('/dashboard'); 
             return;
         }
 
+        // fetch('https://productmanager-backend.onrender.com/api/review/allRequests')
+        //     .then(res => res.json())
+        //     .then(data => setRequests(data.data))
+        //     .catch(error => console.error('Error fetching data:', error));
         fetch('https://productmanager-backend.onrender.com/api/review/allRequests')
             .then(res => res.json())
             .then(data => setRequests(data.data))
@@ -25,10 +29,10 @@ function PendingRequestsPage() {
         <>
         <Header/>
 
-        <div className="min-h-screen bg-gray-100 py-8">
+        <div className="min-h-screen py-8 bg-gray-100">
             <div className="container mx-auto">
-                <h1 className="text-4xl font-bold text-center mb-8 text-red-500">All Requests</h1>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                <h1 className="mb-8 text-4xl font-bold text-center text-red-500">All Requests</h1>
+                <div className="overflow-hidden bg-white rounded-lg shadow-md">
                     {requests.map(request => (
                         <div
                             key={request._id}

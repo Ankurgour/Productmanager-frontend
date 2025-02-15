@@ -9,8 +9,8 @@ import ProductsDisplay from './pages/Products/ProductsDisplay';
 import ProductDetail from './pages/Products/ProductsDetail';
 import MySubmissions from './pages/Profile/profileMySubmissions'
 import Profile from './pages/Profile/Profile';
-import PendingRequestsPage from './pages/pendingRequest.jsx/requests';
-import RequestDetailsPage from './pages/pendingRequest.jsx/requestDetails';
+import PendingRequestsPage from './pages/pendingRequest/requests';
+import RequestDetailsPage from './pages/pendingRequest/requestDetails';
 import Header from './components/shared/Header';
 import Home from './pages/Home/Home';
 import { isAuthenticated } from './components/AuthenticatedRoute';

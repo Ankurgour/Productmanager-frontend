@@ -23,13 +23,20 @@ function RegistrationForm() {
         }
         const user  = {email, password,role};
         try {
+            // const response = await fetch("https://productmanager-backend.onrender.com/api/register", {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(user),
+            // });
             const response = await fetch("https://productmanager-backend.onrender.com/api/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(user),
-            });
+            })
     
             if (response.status === 201) {
                 const jsonResponse = await response.json();
@@ -49,10 +56,10 @@ function RegistrationForm() {
 
 
 return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
-        <div className="mx-auto w-full max-w-md space-y-8 rounded-lg bg-background p-8 shadow-xl">
+    <div className="flex items-center justify-center min-h-screen bg-muted">
+        <div className="w-full max-w-md p-8 mx-auto space-y-8 rounded-lg shadow-xl bg-background">
             <div className="flex flex-col items-center space-y-2 text-red-600">
-                <PackageIcon className="h-12 w-12 text-primary" />
+                <PackageIcon className="w-12 h-12 text-primary" />
               {/* <h2 className="text-2xl font-bold">Product Manager</h2> */}
                 <h2 className="text-2xl font-bold">Register Account</h2>
             </div>
@@ -93,7 +100,7 @@ return (
                             value="admin"
                             checked={role === 'admin'}
                             onChange={(e) => setRole(e.target.value)}
-                            className="form-radio input-field h-6 w-8 bg-red-500"
+                            className="w-8 h-6 bg-red-500 form-radio input-field"
                         />
                         <Label htmlFor="admin">Admin</Label>
                         <Input
@@ -103,16 +110,16 @@ return (
                             value="team member"
                             checked={role === 'team member'}
                             onChange={(e) => setRole(e.target.value)}
-                            className="form-radio input-field h-6 w-6 text-primary"
+                            className="w-6 h-6 form-radio input-field text-primary"
                         />
                         <Label htmlFor="team-member">Team Member</Label>
                     </div>
                 </div>
-                <Button type="submit" className="w-full hover:bg-red-500 border-black border">
+                <Button type="submit" className="w-full border border-black hover:bg-red-500">
                     Register
                 </Button>
             </form>
-            <div className="text-center text-sm text-muted-foreground">
+            <div className="text-sm text-center text-muted-foreground">
                 Already have an account?{' '}
                 <Link to="/login" className="font-medium underline underline-offset-4">
                   Sign in

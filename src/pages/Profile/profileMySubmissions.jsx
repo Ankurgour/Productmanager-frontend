@@ -5,7 +5,7 @@ import Header from '../../components/shared/Header';
 
 function MySubmissions() {
     const [submissions, setSubmissions] = useState([]);
-    const userId = JSON.parse(localStorage.getItem('user'))?._id;
+    const userId = localStorage.getItem('user');
     const navigate = useNavigate();
     useEffect(() => {
         const fetchSubmissions = async () => {
@@ -28,8 +28,8 @@ function MySubmissions() {
     return (
         <>
         <Header/>
-        <div className="max-w-5xl mt-4 mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-red-500 mb-6">My Submissions</h2>
+        <div className="max-w-5xl p-6 mx-auto mt-4 bg-gray-100 rounded-lg shadow-md">
+            <h2 className="mb-6 text-2xl font-bold text-red-500">My Submissions</h2>
             <div className="grid grid-cols-2 gap-4 mb-4 font-medium text-red-500">
                 <div>ID</div>
                 <div>Status</div>

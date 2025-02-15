@@ -13,15 +13,20 @@ import { Button } from "../../components/ui/Button";
 function ProductsDisplay() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
-  const userRole = JSON.parse(localStorage.getItem("user")).role;
+  // const userRole = JSON.parse(localStorage.getItem("user")).role;
+  // const userRole = JSON.parse(localStorage.getItem("user")).role ?? "team";
   // console.log(userRole);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setRole(localStorage.getItem("role"));
         const response = await fetch(
+          // "https://productmanager-backend.onrender.com/api/products"
           "https://productmanager-backend.onrender.com/api/products"
+
         );
         if (!response.ok) {
           throw new Error("Failed to fetch products");
@@ -41,7 +46,7 @@ function ProductsDisplay() {
   return (
     <>
       <Header />
-      <h1 className=" text-4xl text-red-500">Products</h1>
+      <h1 className="text-4xl text-red-500 ">Products</h1>
       {loading ? (
         <Loader />
       ) : (
@@ -54,14 +59,14 @@ function ProductsDisplay() {
                   alt={product.name}
                   width={600}
                   height={600}
-                  className="aspect-square object-cover w-full rounded-t-lg"
+                  className="object-cover w-full rounded-t-lg aspect-square"
                 />
-                <CardContent className="p-6 grid gap-4">
+                <CardContent className="grid gap-4 p-6">
                   <div className="grid gap-2">
                     <CardTitle className="text-lg font-semibold">
                       {product.name}
                     </CardTitle>
-                    <div className="flex items-center gap-2 text-muted-foreground justify-center">
+                    <div className="flex items-center justify-center gap-2 text-muted-foreground">
                       <PackageIcon className="w-4 h-4" />
                       <span>{product.department}</span>{" "}
                     </div>
@@ -72,7 +77,7 @@ function ProductsDisplay() {
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="text-2xl font-bold">${product.price}</div>
-                      <Button className="bg-slate-100 hover:bg-red-500 w-full sm:w-auto">
+                      <Button className="w-full bg-slate-100 hover:bg-red-500 sm:w-auto">
                         See More
                       </Button>
                     </div>
